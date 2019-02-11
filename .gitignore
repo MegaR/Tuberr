@@ -1,0 +1,7 @@
+data/*
+node_modules
+.idea
+/client/public/bundle.js
+app.js
+*.iml
+*.code-workspace
