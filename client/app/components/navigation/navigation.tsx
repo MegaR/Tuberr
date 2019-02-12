@@ -1,30 +1,44 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-export class Navigation extends React.Component {
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+
+class Navigation extends React.Component<RouteComponentProps> {
+
+    constructor(props: RouteComponentProps) {
+        super(props);
+        this.state = {redirect: null};
+    }
+
+    navigate(url: string) {
+        this.props.history.push(url);
+    }
+
     render() {
-        return <div> 
+
+        return <div>
             <Navbar collapseOnSelect expand="md" variant="dark">
-                <Navbar.Brand href="#home">Tuberr</Navbar.Brand>
+                <Navbar.Brand>Tuberr</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="/">
-                        <i className="fab fa-youtube"></i>
-                        &nbsp;Channels
+                    <Nav className="mr-auto" onSelect={(key: string)=>{this.navigate(key)}}>
+                        <Nav.Link eventKey="/">
+                            <i className="fab fa-youtube"></i>
+                            &nbsp;Channels
                         </Nav.Link>
-                        <Nav.Link href="/activity">
+                        <Nav.Link eventKey="/activity">
                         <i className="far fa-clock"></i>
                         &nbsp;Activity
                         </Nav.Link>
-                        <Nav.Link href="/wanted">
+                        <Nav.Link eventKey="/wanted">
                         <i className="fas fa-exclamation-triangle"></i>
                         &nbsp;Wanted
                         </Nav.Link>
-                        <Nav.Link href="/settings">
+                        <Nav.Link eventKey="/settings">
                         <i className="fas fa-cogs"></i>
                         &nbsp;Settings
                         </Nav.Link>
-                        <Nav.Link href="/system">
+                        <Nav.Link eventKey="/system">
                         <i className="fas fa-desktop"></i>
                         &nbsp;System
                         </Nav.Link>
@@ -34,3 +48,5 @@ export class Navigation extends React.Component {
         </div>;
     }
 }
+
+export default withRouter(Navigation);
