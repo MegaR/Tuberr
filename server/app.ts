@@ -18,10 +18,10 @@ class App {
         this.http.use(cookieParser());
         
         this.http.use('/api', this.router);
-        this.http.use(express.static(path.join(__dirname, 'client', 'public')));
+        this.http.use('/public', express.static(path.join('client', 'public')));
         
         this.http.use('/', (req, res) => {
-            res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
+            res.sendFile('index.html', {root: 'client' });
         });
     }
 

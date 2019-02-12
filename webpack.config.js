@@ -6,7 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 const CLIENT_APP_DIR = path.resolve(__dirname, 'client/app');
 const CLIENT_BUILD_DIR = path.resolve(__dirname, 'client/public');
 const clientConfig = {
-    entry: CLIENT_APP_DIR + '/app.jsx',
+    entry: CLIENT_APP_DIR + '/app.tsx',
     mode: 'development',
     output: {
         path: CLIENT_BUILD_DIR,
@@ -16,32 +16,44 @@ const clientConfig = {
         LiveReloadPlugin
     ],
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.css']
     },
     module: {
         rules: [
             {
-                test: /\.jsx?/,
+                test: /\.tsx?/,
                 include: CLIENT_APP_DIR,
-                use:[{
+                use: [{
                     loader: 'babel-loader',
-                    options: {sourceMap: true}
+                    options: { sourceMap: true }
                 }]
             },
             {
-                test: /\.scss$/,
-                use: [{
-                    loader: "style-loader"
-                }, {
-                    loader: "css-loader",
-                    options: {sourceMap: true}
-                }, {
-                    loader: "resolve-url-loader",
-                    options: {sourceMap: true}
-                }, {
-                    loader: "sass-loader",
-                    options: {sourceMap: true}
-                }]
+                test: /\.s?css/,
+                use: [
+                    {
+                        loader: "style-loader",
+                        options: { sourceMap: true }
+                    }, {
+                        loader: "css-loader",
+                        options: { sourceMap: true }
+                    }, {
+                        loader: "resolve-url-loader",
+                        options: { sourceMap: true }
+                    }, {
+                        loader: "sass-loader",
+                        options: { sourceMap: true }
+                    }]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2|svg)$/,
+                use: {
+                  loader: "file-loader",
+                  options: {
+                    name: "fonts/[name].[ext]",
+                    outputPath: "public"
+                  }
+                }
             }
         ]
     }
