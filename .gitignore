@@ -5,3 +5,5 @@ node_modules
 app.js
 *.iml
 *.code-workspace
+data/*
+!data/.gitkeep
