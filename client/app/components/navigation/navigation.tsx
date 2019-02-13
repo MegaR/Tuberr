@@ -19,8 +19,8 @@ class Navigation extends React.Component<RouteComponentProps> {
         return <div>
             <Navbar collapseOnSelect expand="md" variant="dark">
                 <Navbar.Brand>Tuberr</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Toggle/>
+                <Navbar.Collapse>
                     <Nav className="mr-auto" onSelect={(key: string)=>{this.navigate(key)}}>
                         <Nav.Link eventKey="/">
                             <i className="fab fa-youtube"></i>
