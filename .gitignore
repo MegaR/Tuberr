@@ -1,9 +1,10 @@
-data/*
-node_modules
-.idea
-/client/public/*
-app.js
 *.iml
 *.code-workspace
+.idea
+
+node_modules
+/client/public/*
+app.js
+
 data/*
 !data/.gitkeep

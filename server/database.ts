@@ -8,7 +8,7 @@ export class Database {
     }
 
     open(): void {
-        this.db = new sqlite3.Database(':memory:');
+        this.db = new sqlite3.Database('data/database.db');
     }
 
     close(): void {
