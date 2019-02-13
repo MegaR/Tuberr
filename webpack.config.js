@@ -71,7 +71,7 @@ const serverConfig = {
         filename: 'app.js'
     },
     resolve: {
-        extensions: ['.ts']
+        extensions: ['.ts', '.js']
     },
     module: {
         rules: [{
