@@ -4,13 +4,12 @@ import { promisify } from 'util';
 import { Logger } from './logger';
 
 export class Database {
-    db: sqlite3.Database;
+    static db: sqlite3.Database;
 
-    constructor() {
-
+    private constructor() {
     }
 
-    async setup(): Promise<void> {
+    static async setup(): Promise<void> {
         const version = await this.getVersion();
         switch (version) {
             case 0:
@@ -21,7 +20,7 @@ export class Database {
         }
     }
 
-    async getVersion(): Promise<Number> {
+    static async getVersion(): Promise<Number> {
         try {
             const result = await this.get(`SELECT version FROM Version`);
             return result['version'];
@@ -34,7 +33,7 @@ export class Database {
         }
     }
 
-    async get(sql: string): Promise<any> {
+    static async get(sql: string): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.db.get(sql, (error: Error, row) => {
                 if (error) return reject(error);
@@ -43,7 +42,7 @@ export class Database {
         });
     }
 
-    async exec(sql: string): Promise<void> {
+    static async exec(sql: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.db.exec(sql, (error) => {
                 if (error) return reject(error);
@@ -52,12 +51,12 @@ export class Database {
         });
     }
 
-    open(): void {
+    static open(): void {
         this.db = new sqlite3.Database('data/database.db');
         Logger.log('DB', 'Opened database data/database.db');
     }
 
-    close(): void {
+    static close(): void {
         this.db.close();
     }
 }

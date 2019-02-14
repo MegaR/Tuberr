@@ -12,6 +12,7 @@
         "jsx": "react",
         "allowJs": true,
         "inlineSourceMap": true,
-        "inlineSources": true
+        "inlineSources": true,
+        "moduleResolution": "node"
     }
 }

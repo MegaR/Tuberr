@@ -1,4 +1,4 @@
-import * as moment from '../../node_modules/moment/moment';
+import * as moment from 'moment';
 
 export class Logger {
     private constructor() {}
