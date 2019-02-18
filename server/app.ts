@@ -30,7 +30,7 @@ class App {
         this.http.use('/api', API.setup(router));
 
         this.http.use('/public', express.static(path.join('client', 'public')));
-        this.http.use('/', (req, res) => {
+        this.http.get('/', (req, res) => {
             res.sendFile('index.html', {root: 'client' });
         });
     }
